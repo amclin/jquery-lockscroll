@@ -1,0 +1,31 @@
+@CHARSET "UTF-8";
+
+nav {
+	width: 280px;
+	position: fixed;
+	top:	50px;
+	left:	10px;
+	background: #CCCCFF;
+	text-align: right;
+	padding: 10px;
+}
+
+#main {
+	width: 280px;
+	margin-left:	320px;
+	padding:	10px;
+	background:	#CCFFCC;
+}
+
+.user-comment {
+	margin-bottom:	20px;
+	padding-top:	10px;
+	background:	#FFCCCC;
+}
+
+.user-comment header {
+	width:	300px;
+	margin-left: -310px;
+	background:	#FFAAAA;
+	text-align:	right;
+}
