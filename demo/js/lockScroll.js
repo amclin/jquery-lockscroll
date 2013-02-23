@@ -1,4 +1,4 @@
-/**
+/*!
  * lockScroll plugin for JQuery
  * @author Anthony McLin
  * @website http://anthonymclin.com
