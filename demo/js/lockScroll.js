@@ -2,6 +2,7 @@
  * lockScroll plugin for JQuery
  * @author Anthony McLin
  * @website http://anthonymclin.com
+ * @version 1.3
  * Allows you to make an element toggle between fixed and absolute layouts
  * This exposes far more options than the original
  * 
@@ -13,6 +14,9 @@
  *   triggerPosition: If no triggerElement is provided, an exact pixel value is necessary for how far the page scrolls before triggering the change in scrolling behavior
  *   triggerThreshold : Override the calculated point where the scrolling page elements trigger the change in scrolling behavior
  *   offsetTop : Optionally force the distance from the top of the window for positioning the moving element
+ *   modifyPosition : Set to False to disable the change in Position:Aboslute and Position:Fixed
+ *   classState : Extra classes lockScrollOn and lockScrollOff are added to the target element. Override these classes here.
+ *   
 **/
 (function($) {
 	$.fn.lockScroll = function( settings ) {
@@ -21,7 +25,9 @@
 			triggerElement : null,
 			triggerPosition: null,
 			triggerThreshold : null,
-			offsetTop : null
+			offsetTop : null,
+			modifyPosition : true,
+			classState : { on : 'lockScrollOn', off : 'lockScrollOff' }
 		}, settings);
 
 		return this.each(function() {
@@ -47,12 +53,19 @@
 			
 			//Bind to the window scroll event
 			$(window).bind('load scroll', function(e) {
+				console.log(options);
 				if($(window).scrollTop() + options.offsetTop >= options.triggerThreshold) {
 					//threshold object is above the bottom of our locked element
-					el.css({ position: "absolute", top: options.triggerThreshold });
+					if(options.modifyPosition) {
+						el.css({ position: "absolute", top: options.triggerThreshold });
+					}
+					el.removeClass(options.classState.on).addClass(options.classState.off);
 				} else {
 					//threshold object is below the bottom of our locked element
-					el.css({ position: "fixed", top: options.offsetTop });
+					if(options.modifyPosition) {
+						el.css({ position: "fixed", top: options.offsetTop });
+					}
+					el.removeClass(options.classState.off).addClass(options.classState.on);
 				}
 			});
 		
